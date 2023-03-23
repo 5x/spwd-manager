@@ -8,11 +8,15 @@ def validate(value, schema):
         except (TypeError, ValueError):
             return 0
     elif schema is str:
+        if isinstance(type(value), type):
+            return ""
         return str(value).strip()
     elif schema is bool:
+        if isinstance(type(value), type):
+            return False
         return bool(value)
     elif isinstance(schema, (tuple, list, dict)):
-        if not value or not isinstance(value, type(schema)):
+        if value is None or not isinstance(value, type(schema)):
             return type(schema)()
         if not schema:
             return value
